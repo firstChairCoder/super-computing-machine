@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
@@ -5,18 +6,16 @@ import {
   TopNav,
   Text,
   themeColor,
-  useTheme,
+  useTheme
 } from "react-native-rapi-ui";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { StackScreenProps } from "@react-navigation/stack";
-import { MainStackParamList } from "../navigation";
+import type { StackScreenProps } from "@react-navigation/stack";
 
-
-
+import type { MainStackParamList } from "../navigation";
 
 export default function ({
-  navigation,
+  navigation
 }: StackScreenProps<MainStackParamList, "Home">) {
   const { isDarkmode, setTheme } = useTheme();
 
@@ -29,15 +28,14 @@ export default function ({
       borderRadius: 10,
       flexDirection: "row",
       justifyContent: "space-between",
-      alignItems: "center",
-    },
+      alignItems: "center"
+    }
   });
 
-  
   return (
     <Layout>
       <TopNav
-        middleContent="react-native-rapi-ui"
+        middleContent="UI HUB"
         rightContent={
           <Ionicons
             name={isDarkmode ? "sunny" : "moon"}
@@ -54,6 +52,17 @@ export default function ({
         }}
       />
       <ScrollView>
+        <TouchableOpacity onPress={() => navigation.navigate("Buttons")}>
+          <View style={styles.listItem}>
+            <Text fontWeight="medium">Buttons</Text>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={isDarkmode ? themeColor.white : themeColor.black}
+            />
+          </View>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => navigation.navigate("Typography")}>
           <View style={styles.listItem}>
             <Text fontWeight="medium">Typography</Text>
@@ -74,16 +83,7 @@ export default function ({
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Buttons")}>
-          <View style={styles.listItem}>
-            <Text fontWeight="medium">Buttons</Text>
-            <Ionicons
-              name="chevron-forward"
-              size={20}
-              color={isDarkmode ? themeColor.white : themeColor.black}
-            />
-          </View>
-        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => navigation.navigate("Forms")}>
           <View style={styles.listItem}>
             <Text fontWeight="medium">Forms</Text>

@@ -1,6 +1,8 @@
+/* eslint-disable import/no-cycle */
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
+
 import Home from "../screens/Home";
 import Typography from "../screens/Typography";
 import Buttons from "../screens/Buttons";
@@ -20,7 +22,7 @@ export type MainStackParamList = {
   Avatar: undefined;
 };
 
-const MainStack = createStackNavigator();
+const { Navigator, Screen } = createStackNavigator<MainStackParamList>();
 const Main = () => {
   const linking = {
     prefixes: [
@@ -32,26 +34,25 @@ const Main = () => {
         Typography: "typography",
         Buttons: "buttons",
         Colors: "colors",
-        Forms: "forms",
-      },
-    },
+        Forms: "forms"
+      }
+    }
   };
   return (
     <NavigationContainer linking={linking}>
-      <MainStack.Navigator
-        initialRouteName="Home"
+      <Navigator
         screenOptions={{
-          headerShown: false,
+          headerShown: false
         }}
       >
-        <MainStack.Screen name="Home" component={Home} />
-        <MainStack.Screen name="Typography" component={Typography} />
-        <MainStack.Screen name="Buttons" component={Buttons} />
-        <MainStack.Screen name="Colors" component={Colors} />
-        <MainStack.Screen name="Forms" component={Forms} />
-        <MainStack.Screen name="Section" component={Section} />
-        <MainStack.Screen name="Avatar" component={Avatar} />
-      </MainStack.Navigator>
+        <Screen name="Home" component={Home} />
+        <Screen name="Typography" component={Typography} />
+        <Screen name="Buttons" component={Buttons} />
+        <Screen name="Colors" component={Colors} />
+        <Screen name="Forms" component={Forms} />
+        <Screen name="Section" component={Section} />
+        <Screen name="Avatar" component={Avatar} />
+      </Navigator>
     </NavigationContainer>
   );
 };
