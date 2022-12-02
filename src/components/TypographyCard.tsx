@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Section, SectionContent, Text } from "react-native-rapi-ui";
-import { fontSize } from "react-native-rapi-ui/constants/typography";
+import type { fontSize } from "react-native-rapi-ui/constants/typography";
 interface Props {
   size?: keyof typeof fontSize;
 }
@@ -14,7 +14,7 @@ const TypographyCard: React.FC<Props> = (props: Props) => {
           marginHorizontal: 20,
           marginTop: 20,
           marginBottom: 10,
-          flexDirection: "row",
+          flexDirection: "row"
         }}
       >
         <Text fontWeight="medium">Size </Text>
