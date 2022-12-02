@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import React, { useCallback } from "react";
-import { Pressable, Text } from "react-native";
+import React, { useEffect, useRef, useCallback } from "react";
+import { Animated, Pressable, Text } from "react-native";
 import type {
   PressableProps,
   TextStyle,
@@ -22,6 +22,9 @@ interface ButtonProps extends PressableProps {
   color?: string;
   label: string;
   accent?: "primary" | "success" | "warning" | "info" | "error";
+  animatedStyle?: any;
+  animate?: boolean;
+  onPress?: () => void;
 }
 
 interface ContentProps {
@@ -34,6 +37,7 @@ interface ContentProps {
   disabled?: boolean;
   label: string;
   accent?: "primary" | "success" | "warning" | "info" | "error";
+  animatedStyle?: any;
 }
 
 const Content = ({
@@ -44,10 +48,11 @@ const Content = ({
   mainColor,
   disabled = false,
   subColor,
+  animatedStyle,
   label
 }: ContentProps) => {
   return (
-    <>
+    <Animated.View style={[animatedStyle, { flexDirection: "row" }]}>
       {leftContent}
       <Text
         style={[
@@ -68,7 +73,7 @@ const Content = ({
         {label}
       </Text>
       {rightContent}
-    </>
+    </Animated.View>
   );
 };
 
@@ -84,6 +89,8 @@ const Button = ({
   label,
   accent,
   disabled = false,
+  animate,
+  onPress,
   ...props
 }: ButtonProps) => {
   const mainColor = disabled
@@ -108,6 +115,23 @@ const Button = ({
       }
     : { backgroundColor: mainColor };
 
+  const animatedScale = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    animatedScale.setValue(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onAnimatePress = () => {
+    animatedScale.setValue(0.8);
+    Animated.spring(animatedScale, {
+      toValue: 1,
+      bounciness: 24,
+      speed: 20,
+      useNativeDriver: true
+    }).start();
+  };
+
   return (
     <CustomPressable
       style={[
@@ -119,6 +143,7 @@ const Button = ({
       delayHoverIn={50}
       activeOpacity={0.5}
       android_ripple={{ color: mainColor, borderless: false }}
+      onPress={animate ? onAnimatePress : onPress}
     >
       <Content
         {...props}
@@ -128,6 +153,8 @@ const Button = ({
         mainColor={mainColor}
         subColor={selectedSubColor}
         label={label}
+        // animatedStyle={animatedStyle}
+        animatedStyle={{ transform: [{ scale: animatedScale }] }}
       />
     </CustomPressable>
   );

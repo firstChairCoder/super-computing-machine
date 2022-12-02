@@ -187,8 +187,8 @@
 // }
 
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
-import { View } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { Animated, View } from "react-native";
 
 import Button from "../components/Button";
 import { colors } from "../constants/colors";
@@ -212,6 +212,23 @@ const Card = ({ children }: { children: React.ReactNode }) => {
 };
 
 const ButtonScreen = () => {
+  const animatedScale = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    animatedScale.setValue(1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onPress = () => {
+    animatedScale.setValue(0.8);
+    Animated.spring(animatedScale, {
+      toValue: 1,
+      bounciness: 24,
+      speed: 20,
+      useNativeDriver: true
+    }).start();
+  };
+
   return (
     <View
       style={{
@@ -285,6 +302,19 @@ const ButtonScreen = () => {
               style={{ marginLeft: 8 }}
             />
           }
+        />
+
+        <Button
+          style={{
+            marginVertical: 8,
+            borderRadius: 8,
+            height: 80,
+            paddingHorizontal: 8
+          }}
+          textStyle={{ fontFamily: "Black", fontSize: 20, color: colors.white }}
+          accent="warning"
+          label={"Warning Button w/ animation"}
+          animate
         />
       </Card>
     </View>
