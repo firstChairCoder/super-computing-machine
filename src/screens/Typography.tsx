@@ -1,51 +1,28 @@
 import React from "react";
 import { ScrollView } from "react-native";
-import { Layout, TopNav, themeColor, useTheme } from "react-native-rapi-ui";
+import { useTheme } from "react-native-rapi-ui";
+import type { StackScreenProps } from "@react-navigation/stack";
+
 import TypograpnyCard from "../components/TypographyCard";
-import { Ionicons } from "@expo/vector-icons";
-import { MainStackParamList } from "../navigation";
-import { StackScreenProps } from "@react-navigation/stack";
+import type { MainStackParamList } from "../navigation";
 
 export default function ({
-  navigation,
+  navigation
 }: StackScreenProps<MainStackParamList, "Typography">) {
   const { isDarkmode, setTheme } = useTheme();
   return (
-    <Layout>
-      <TopNav
-        leftContent={
-          <Ionicons
-            name="chevron-back"
-            size={20}
-            color={isDarkmode ? themeColor.white : themeColor.black}
-          />
-        }
-        leftAction={() => navigation.goBack()}
-        middleContent="Typography"
-        rightContent={
-          <Ionicons
-            name={isDarkmode ? "sunny" : "moon"}
-            size={20}
-            color={isDarkmode ? themeColor.white100 : themeColor.dark}
-          />
-        }
-        rightAction={() => {
-          if (isDarkmode) {
-            setTheme("light");
-          } else {
-            setTheme("dark");
-          }
-        }}
-      />
-      <ScrollView>
-        <TypograpnyCard size="h1" />
-        <TypograpnyCard size="h2" />
-        <TypograpnyCard size="h3" />
-        <TypograpnyCard size="xl" />
-        <TypograpnyCard size="lg" />
-        <TypograpnyCard size="md" />
-        <TypograpnyCard size="sm" />
-      </ScrollView>
-    </Layout>
+    <ScrollView
+      style={{ flex: 1 }}
+      bounces={false}
+      showsVerticalScrollIndicator={false}
+    >
+      <TypograpnyCard size="h1" />
+      <TypograpnyCard size="h2" />
+      <TypograpnyCard size="h3" />
+      <TypograpnyCard size="xl" />
+      <TypograpnyCard size="lg" />
+      <TypograpnyCard size="md" />
+      <TypograpnyCard size="sm" />
+    </ScrollView>
   );
 }

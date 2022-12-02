@@ -1,33 +1,60 @@
-import React from "react";
-import { Text as RNText } from "react-native";
-import type { TextStyle } from "react-native";
+import * as React from "react";
+import type { ReactNode } from "react";
+import type { TextProps } from "react-native";
+import { Text } from "react-native";
 
-import type { StatusType } from "../typings";
 import { colors } from "../constants/colors";
 
-interface CustomTextProps {
-  style?: TextStyle;
-  status?: StatusType;
+interface Props extends TextProps {
+  children?: ReactNode;
 }
 
-const CustomText = ({
-  style,
-  status = "primary",
-  ...rest
-}: CustomTextProps) => {
-  const statusColor = colors[status];
+export const Light = (props: Props) => (
+  <Text
+    {...props}
+    style={[{ fontFamily: "Light", fontSize: 12 }, props.style]}
+  />
+);
 
-  return (
-    <RNText
-      {...rest}
-      style={{
-        ...style,
-        // fontFamily: font(),
-        fontSize: 16,
-        color: colors.black
-      }}
-    />
-  );
-};
+export const Regular = (props: Props) => (
+  <Text
+    {...props}
+    style={[{ fontFamily: "Regular", fontSize: 16 }, props.style]}
+  />
+);
 
-export default CustomText;
+export const Italic = (props: Props) => (
+  <Text {...props} style={[{ fontFamily: "Italic" }, props.style]} />
+);
+
+export const SemiBold = (props: Props) => (
+  <Text
+    {...props}
+    style={[{ fontFamily: "SemiBold", fontSize: 28 }, props.style]}
+  />
+);
+
+export const Bold = (props: Props) => (
+  <Text
+    {...props}
+    style={[{ fontFamily: "Bold", fontSize: 36 }, props.style]}
+  />
+);
+
+export const Title = (props: Props) => (
+  <Bold {...props} style={[{ fontSize: 28 }, props.style]} />
+);
+
+export const Subtitle = (props: Props) => (
+  <Regular
+    {...props}
+    style={[{ color: colors.gray100, fontSize: 25 }, props.style]}
+  />
+);
+
+export const Secondary = (props: Props) => (
+  <Regular
+    {...props}
+    style={[{ color: colors.gray100, fontSize: 16 }, props.style]}
+  />
+);
