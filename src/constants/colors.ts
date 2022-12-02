@@ -2,7 +2,7 @@ export const colors = {
   black: "#17161A",
   white: "#FFF",
   primary: "#9E77ED",
-  primary100: "F0E4FE",
+  primary900: "#281671",
   gray100: "#C0C0C0",
   disabled: "#E8E8E8",
   success: "#79BA18",
