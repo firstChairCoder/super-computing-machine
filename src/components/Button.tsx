@@ -168,7 +168,7 @@ interface CustomPressableProps extends PressableProps {
   disabledOpacity?: number;
   style: StyleProp<ViewStyle>;
 }
-function CustomPressable({
+export function CustomPressable({
   children,
   activeOpacity,
   style,

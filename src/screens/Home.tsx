@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
@@ -114,6 +113,27 @@ export default function ({
             />
           </View>
         </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Accordion")}>
+          <View style={styles.listItem}>
+            <Text fontWeight="medium">Accordion</Text>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={isDarkmode ? themeColor.white : themeColor.black}
+            />
+          </View>
+        </TouchableOpacity>
+
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Progress")}>
+          <View style={styles.listItem}>
+            <Text fontWeight="medium">Progress</Text>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={isDarkmode ? themeColor.white : themeColor.black}
+            />
+          </View>
+        </TouchableOpacity> */}
       </ScrollView>
     </Layout>
   );

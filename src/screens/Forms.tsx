@@ -1,160 +1,142 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import {
-  Layout,
-  TopNav,
-  Text,
-  TextInput,
-  Picker,
-  CheckBox,
-  RadioButton,
-  themeColor,
-  SectionContent,
-  Section,
-  useTheme,
-} from "react-native-rapi-ui";
+import { RadioButton } from "react-native-rapi-ui";
 import { Ionicons } from "@expo/vector-icons";
-import { StackScreenProps } from "@react-navigation/stack";
-import { MainStackParamList } from "../navigation";
+import type { StackScreenProps } from "@react-navigation/stack";
+
+import type { MainStackParamList } from "../navigation";
+import Input from "../components/Input";
+import { colors } from "../constants/colors";
+import Card from "../components/Card";
+import Picker from "../components/Picker";
+import * as Text from "../components/Text";
+import CheckBox from "../components/CheckBox";
 
 export default function ({
-  navigation,
+  navigation
 }: StackScreenProps<MainStackParamList, "Forms">) {
-  const { isDarkmode, setTheme } = useTheme();
-  const [text, setText] = React.useState<string>("");
-  const [pass, setPass] = React.useState<string>("");
-  const [email, setEmail] = React.useState<string>("");
-  const [value, setValue] = React.useState<string | null>(null);
-  const [toggle, setToggle] = React.useState<boolean>(false);
-  const [RadioToggle, setRadioToggle] = React.useState<boolean>(false);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [value, setValue] = useState<string | null>(null);
+  const [isChecked, setIsChecked] = useState(false);
+  const [isRadioChecked, setIsRadioChecked] = useState(false);
 
   const items = [
-    { label: "Front-end Developer", value: "FED" },
-    { label: "Back-end Developer", value: "BED" },
-    { label: "Full-stack Developer", value: "FSD" },
+    { label: "January", value: "JAN" },
+    { label: "February", value: "FEB" },
+    { label: "March", value: "MAR" },
+    { label: "April", value: "APR" },
+    { label: "May", value: "MAY" },
+    { label: "June", value: "JUN" },
+    { label: "July", value: "JUL" },
+    { label: "August", value: "AUG" },
+    { label: "September", value: "SEP" },
+    { label: "October", value: "OCT" },
+    { label: "November", value: "NOV" },
+    { label: "December", value: "DEC" }
   ];
 
   return (
-    <Layout>
-      <TopNav
-        leftContent={
-          <Ionicons
-            name="chevron-back"
-            size={20}
-            color={isDarkmode ? themeColor.white : themeColor.black}
-          />
-        }
-        leftAction={() => navigation.goBack()}
-        middleContent="Forms"
-        rightContent={
-          <Ionicons
-            name={isDarkmode ? "sunny" : "moon"}
-            size={20}
-            color={isDarkmode ? themeColor.white100 : themeColor.dark}
-          />
-        }
-        rightAction={() => {
-          if (isDarkmode) {
-            setTheme("light");
-          } else {
-            setTheme("dark");
-          }
-        }}
-      />
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "snow"
+      }}
+    >
       <ScrollView>
-        <Section style={{ marginHorizontal: 20, marginTop: 20 }}>
-          <SectionContent>
-            <View style={{ marginBottom: 20 }}>
-              <Text style={{ marginBottom: 10 }}>TextInput</Text>
+        <Card style={{ paddingHorizontal: 20, marginTop: 20, width: "100%" }}>
+          <View style={{ marginBottom: 16 }}>
+            <Text.Title style={{ marginBottom: 10 }}>Basic Input</Text.Title>
 
-              <TextInput
-                placeholder="Enter your text"
-                value={text}
-                onChangeText={(val) => setText(val)}
-              />
-            </View>
-            <View style={{ marginBottom: 20 }}>
-              <Text style={{ marginBottom: 10 }}>
-                TextInput with leftContent
-              </Text>
+            <Input
+              placeholder="Enter your name"
+              value={name}
+              onChangeText={(val) => setName(val)}
+            />
+          </View>
+          <View style={{ marginBottom: 16 }}>
+            <Text.Title style={{ marginBottom: 10 }}>
+              TextInput w/ content
+            </Text.Title>
 
-              <TextInput
-                placeholder="Enter your password"
-                value={pass}
-                onChangeText={(val) => setPass(val)}
-                leftContent={
-                  <Ionicons
-                    name="lock-closed"
-                    size={20}
-                    color={themeColor.gray300}
-                  />
-                }
-              />
-            </View>
-            <View>
-              <Text style={{ marginBottom: 10 }}>
-                TextInput with rightContent
-              </Text>
+            <Input
+              placeholder="Enter your email"
+              value={email}
+              onChangeText={(val) => setEmail(val)}
+              leftContent={
+                <Ionicons name="mail" size={16} color={colors.gray100} />
+              }
+            />
+          </View>
+          <View>
+            <Text.Title style={{ marginBottom: 10 }}>
+              TextInput w/ 2 contents
+            </Text.Title>
 
-              <TextInput
-                placeholder="Enter your email"
-                value={email}
-                onChangeText={(val) => setEmail(val)}
-                rightContent={
-                  <Ionicons name="mail" size={20} color={themeColor.gray300} />
-                }
-              />
-            </View>
-          </SectionContent>
-        </Section>
-        <Section style={{ marginHorizontal: 20, marginTop: 20 }}>
-          <SectionContent>
-            <View>
-              <Text style={{ marginBottom: 10 }}>Picker</Text>
-              <Picker
-                items={items}
-                value={value}
-                placeholder="Choose your role"
-                onValueChange={(val) => setValue(val)}
-              />
-            </View>
-          </SectionContent>
-        </Section>
-        <Section style={{ marginHorizontal: 20, marginTop: 20 }}>
-          <SectionContent>
-            <View>
-              <Text style={{ marginBottom: 10 }}>CheckBox</Text>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <CheckBox
-                  value={toggle}
-                  onValueChange={(val) => setToggle(val)}
+            {/*TODO;  Convert to password type input */}
+            <Input
+              placeholder="Enter your password"
+              value={password}
+              onChangeText={(val) => setPassword(val)}
+              leftContent={
+                <Ionicons
+                  name="lock-closed-sharp"
+                  size={16}
+                  color={colors.gray100}
                 />
-                <Text size="md" style={{ marginLeft: 10, color: "gray" }}>
-                  I agree with the Terms & Conditions
-                </Text>
-              </View>
+              }
+              rightContent={
+                <Ionicons name="eye" size={16} color={colors.gray100} />
+              }
+            />
+          </View>
+        </Card>
+
+        <Card style={{ paddingHorizontal: 20, marginTop: 20, width: "100%" }}>
+          <>
+            <Text.Title style={{ marginBottom: 10 }}>Picker</Text.Title>
+            <Picker
+              placeholder="Select an option"
+              items={items}
+              value={value}
+              onChangeSelection={(val) => setValue(val)}
+            />
+          </>
+        </Card>
+
+        <Card style={{ paddingHorizontal: 20, marginTop: 20, width: "100%" }}>
+          <>
+            <Text.Title style={{ marginBottom: 10 }}>Selectors</Text.Title>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginBottom: 10
+              }}
+            >
+              <CheckBox
+                value={isChecked}
+                onValueChange={(val) => setIsChecked(val)}
+              />
+              <Text.Italic style={{ marginLeft: 10, color: "gray" }}>
+                I agree with the Terms & Conditions
+              </Text.Italic>
             </View>
-          </SectionContent>
-        </Section>
-        <Section
-          style={{ marginHorizontal: 20, marginTop: 20, marginBottom: 20 }}
-        >
-          <SectionContent>
-            <View>
-              <Text style={{ marginBottom: 10 }}>RadioButton</Text>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <RadioButton
-                  value={RadioToggle}
-                  onValueChange={(val) => setRadioToggle(val)}
-                />
-                <Text size="md" style={{ marginLeft: 10, color: "gray" }}>
-                  I agree with the Terms & Conditions
-                </Text>
-              </View>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <RadioButton
+                value={isRadioChecked}
+                onValueChange={(val) => setIsRadioChecked(val)}
+              />
+              <Text.Italic style={{ marginLeft: 10, color: "gray" }}>
+                I don't agree with the Terms & Conditions
+              </Text.Italic>
             </View>
-          </SectionContent>
-        </Section>
+          </>
+        </Card>
       </ScrollView>
-    </Layout>
+    </View>
   );
 }
