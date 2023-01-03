@@ -4,7 +4,7 @@ import Animated, { useAnimatedStyle } from "react-native-reanimated";
 import { mix, mixColor } from "react-native-redash";
 import { Ionicons } from "@expo/vector-icons";
 
-import Accordion, { IList } from "../components/AccordionList";
+import Accordion, { IList } from "../components/Accordion";
 
 const SIZE = 28;
 const styles = StyleSheet.create({

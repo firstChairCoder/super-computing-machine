@@ -8,8 +8,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-import { Loader, Skeleton } from "../components/Loader";
-import { ItemListLoader } from "../components/ItemListLoader";
+import { Loader, Skeleton, ItemListLoader } from "../components/Skeleton";
 
 const styles = StyleSheet.create({
 	container: {
