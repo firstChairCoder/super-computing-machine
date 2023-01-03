@@ -72,16 +72,6 @@ export default function ({
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Colors")}>
-          <View style={styles.listItem}>
-            <Text fontWeight="medium">Colors</Text>
-            <Ionicons
-              name="chevron-forward"
-              size={20}
-              color={isDarkmode ? themeColor.white : themeColor.black}
-            />
-          </View>
-        </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate("Forms")}>
           <View style={styles.listItem}>
@@ -93,16 +83,7 @@ export default function ({
             />
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Section")}>
-          <View style={styles.listItem}>
-            <Text fontWeight="medium">Section</Text>
-            <Ionicons
-              name="chevron-forward"
-              size={20}
-              color={isDarkmode ? themeColor.white : themeColor.black}
-            />
-          </View>
-        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => navigation.navigate("Avatar")}>
           <View style={styles.listItem}>
             <Text fontWeight="medium">Avatar</Text>
@@ -116,6 +97,17 @@ export default function ({
         <TouchableOpacity onPress={() => navigation.navigate("Accordion")}>
           <View style={styles.listItem}>
             <Text fontWeight="medium">Accordion</Text>
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={isDarkmode ? themeColor.white : themeColor.black}
+            />
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigation.navigate("Skeleton")}>
+          <View style={styles.listItem}>
+            <Text fontWeight="medium">Skeleton</Text>
             <Ionicons
               name="chevron-forward"
               size={20}

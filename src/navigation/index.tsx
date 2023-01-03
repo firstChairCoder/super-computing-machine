@@ -11,6 +11,7 @@ import Forms from "../screens/Forms";
 import Section from "../screens/Section";
 import Avatar from "../screens/Avatar";
 import Accordion from "../screens/Accordion";
+import SkeletonLoader from "../screens/SkeletonLoader";
 
 export type MainStackParamList = {
   Home: undefined;
@@ -23,6 +24,7 @@ export type MainStackParamList = {
   Avatar: undefined;
   Progress: undefined;
   Accordion: undefined;
+  Skeleton: undefined;
 };
 
 const { Navigator, Screen } = createStackNavigator<MainStackParamList>();
@@ -39,7 +41,8 @@ const Main = () => {
         Colors: "colors",
         Forms: "forms",
         Progress: "progress",
-        Accordion: "accordion"
+        Accordion: "accordion",
+        Skeleton: "skeleton"
       }
     }
   };
@@ -59,6 +62,7 @@ const Main = () => {
         <Screen name="Avatar" component={Avatar} />
         <Screen name="Accordion" component={Accordion} />
         {/* <Screen name="Progress" component={ProgressBar} /> */}
+        <Screen name="Skeleton" component={SkeletonLoader} />
       </Navigator>
     </NavigationContainer>
   );

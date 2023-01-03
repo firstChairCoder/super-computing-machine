@@ -34,7 +34,7 @@ const TypographyCard = ({ size }: { size: SizeType }) => {
           alignItems: "center"
         }}
       >
-        <AText fontWeight="medium">Size </AText>
+        <Text.Light>Size </Text.Light>
         <Text.Title style={{ textTransform: "uppercase" }}>{size}</Text.Title>
       </View>
 
